@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5pt"
+    app:cardElevation="7pt"
+    android:layout_margin="10pt"
+    android:outlineProvider="bounds"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="12pt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Este es el titulode nuestro Card view"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aqui irá nuestro contenido para el ejemplo de nuestra clase"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>
