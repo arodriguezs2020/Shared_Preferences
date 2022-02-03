@@ -31,20 +31,20 @@ class LoginActivity : AppCompatActivity() {
         switchRecordar = findViewById<Switch>(R.id.switchRecordar)
 
         // Modo en que se crea el archivo, si no se necesita multiples Preferencias usamos las Shared por defecto
-        preferencias = PreferenceManager.getDefaultSharedPreferences(this)
+        // preferencias = PreferenceManager.getDefaultSharedPreferences(this)
 
         // Si se necesitan multiples preferencias
-        preferencias = getSharedPreferences("Preferencias", Context.MODE_PRIVATE)
-
-        ponerPreferenciasSiExisten()
+        preferencias = getPreferences(Context.MODE_PRIVATE)
 
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         editTextEmail = findViewById(R.id.editTextEmail)
         editTextPass = findViewById(R.id.editTextPass)
 
+        ponerPreferenciasSiExisten()
+
         btnLogin.setOnClickListener {
-            val email = editTextEmail!!.text.toString()
-            val pass = editTextPass!!.text.toString()
+            val email = editTextEmail?.text.toString()
+            val pass = editTextPass?.text.toString()
 
             if (logeo(email, pass)) {
                 val intent = Intent(this, MainActivity::class.java)
@@ -77,11 +77,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun guardarPreferencias(email: String, pass: String) {
-        if (switchRecordar!!.isChecked) {
-            preferencias!!.edit()
-                .putString("email", email)
-                .putString("pass", pass)
-                .apply()
+        if (switchRecordar?.isChecked == true) {
+            preferencias?.edit()
+                ?.putString("email", email)
+                ?.putString("pass", pass)
+                ?.apply()
         }
     }
 
@@ -90,9 +90,9 @@ class LoginActivity : AppCompatActivity() {
         val pass = preferencias?.getString("pass", "")
 
         if (!email.isNullOrEmpty() && !pass.isNullOrEmpty()) {
-            editTextEmail!!.setText(email)
-            editTextPass!!.setText(pass)
-            switchRecordar!!.isChecked = true
+            editTextEmail?.setText(email)
+            editTextPass?.setText(pass)
+            switchRecordar?.isChecked = true
         }
     }
 }

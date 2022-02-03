@@ -1,5 +1,6 @@
 package seve.alo.apps.shared_preferences
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
@@ -20,14 +21,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        preferencias = getPreferences(Context.MODE_PRIVATE)
+
         toolbarColaps = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar)
-        toolbarColaps!!.title = "Beneficios de usar Kotlin"
+        toolbarColaps?.title = "Beneficios de usar Kotlin"
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
-
-        preferencias = PreferenceManager.getDefaultSharedPreferences(this)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -54,6 +54,4 @@ class MainActivity : AppCompatActivity() {
         }
         else ->false
     }
-
-
 }
