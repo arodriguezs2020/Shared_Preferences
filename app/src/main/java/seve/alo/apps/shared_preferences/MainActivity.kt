@@ -13,9 +13,8 @@ import com.google.android.material.appbar.CollapsingToolbarLayout
 
 class MainActivity : AppCompatActivity() {
 
-    var toolbarColaps : CollapsingToolbarLayout? = null
-
-    var preferencias : SharedPreferences? = null
+    private lateinit var toolbarColaps : CollapsingToolbarLayout
+    private lateinit var preferencias : SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         preferencias = getPreferences(Context.MODE_PRIVATE)
 
         toolbarColaps = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar)
-        toolbarColaps?.title = "Beneficios de usar Kotlin"
+        toolbarColaps.title = "Beneficios de usar Kotlin"
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -45,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
         R.id.menuOlvidar -> {
-            preferencias!!.edit().clear().apply()
+            preferencias.edit().clear().apply()
             val intent = Intent(this@MainActivity, LoginActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)

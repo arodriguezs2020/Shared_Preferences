@@ -1,25 +1,25 @@
 package seve.alo.apps.shared_preferences
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
-import android.text.TextUtils
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Switch
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 
+@SuppressLint("UseSwitchCompatOrMaterialCode")
 class LoginActivity : AppCompatActivity() {
 
-    var preferencias : SharedPreferences?= null
-    var switchRecordar: Switch?= null
-    var editTextEmail : EditText?= null
-    var editTextPass : EditText?= null
+    private lateinit var preferencias : SharedPreferences
+    private lateinit var switchRecordar: Switch
+    private lateinit var editTextEmail : EditText
+    private lateinit var editTextPass : EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +28,7 @@ class LoginActivity : AppCompatActivity() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        switchRecordar = findViewById<Switch>(R.id.switchRecordar)
+        switchRecordar = findViewById(R.id.switchRecordar)
 
         // Modo en que se crea el archivo, si no se necesita multiples Preferencias usamos las Shared por defecto
         // preferencias = PreferenceManager.getDefaultSharedPreferences(this)
@@ -43,8 +43,8 @@ class LoginActivity : AppCompatActivity() {
         ponerPreferenciasSiExisten()
 
         btnLogin.setOnClickListener {
-            val email = editTextEmail?.text.toString()
-            val pass = editTextPass?.text.toString()
+            val email = editTextEmail.text.toString()
+            val pass = editTextPass.text.toString()
 
             if (logeo(email, pass)) {
                 val intent = Intent(this, MainActivity::class.java)
@@ -57,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
     }
     
     fun validarEmail(email: String) : Boolean {
-        return !email.isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        return !email.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
     
     fun validarPass(pass: String) : Boolean {
@@ -77,8 +77,8 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun guardarPreferencias(email: String, pass: String) {
-        if (switchRecordar?.isChecked == true) {
-            preferencias?.edit()
+        if (switchRecordar.isChecked == true) {
+            preferencias.edit()
                 ?.putString("email", email)
                 ?.putString("pass", pass)
                 ?.apply()
@@ -86,13 +86,13 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun ponerPreferenciasSiExisten() {
-        val email = preferencias?.getString("email", "")
-        val pass = preferencias?.getString("pass", "")
+        val email = preferencias.getString("email", "")
+        val pass = preferencias.getString("pass", "")
 
         if (!email.isNullOrEmpty() && !pass.isNullOrEmpty()) {
-            editTextEmail?.setText(email)
-            editTextPass?.setText(pass)
-            switchRecordar?.isChecked = true
+            editTextEmail.setText(email)
+            editTextPass.setText(pass)
+            switchRecordar.isChecked = true
         }
     }
 }
